@@ -1,12 +1,12 @@
 ﻿module Synthesis
 
-let abelar _ =
-    failwith "Not implemented"
+let abelar a =
+    a>12 && a<3097 && a%12=0
 
-let area _ _ =
-    failwith "Not implemented"
+let area a b =
+    a*b*(0.5)
 
-let zollo _ =
+let zollo a =
     failwith "Not implemented"
 
 let min _ _ =
