@@ -4,10 +4,14 @@ let abelar a =
     a>12 && a<3097 && a%12=0
 
 let area a b =
-    a*b*(0.5)
+    match a<0.0 || b<0.0 with
+      |true -> failwith "cannot enter negative numbers"
+      |false -> a*b*(0.5)
 
 let zollo a =
-    failwith "Not implemented"
+    match a < 0 with
+      |true -> -a
+      |false -> a*2
 
 let min _ _ =
     failwith "Not implemented"
