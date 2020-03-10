@@ -27,10 +27,13 @@ let ofTime a b c =
     (a*60*60)+(b*60)+c
 
 let toTime a =
-      let hour = int(a/(60*60)) in
-          let min = int(((float(a/(60*60)))-float(hour))*60.0) in 
-              let second = int(((((float(a/(60*60)))-float(hour))*60.0)-float(min))*60.0) in 
-                   (hour,min,second) 
+    match a>0 with
+      | true -> let hour = a/3600 in
+                        let min = System.Convert.ToInt32(((float(a)/3600.0)-float(hour))*60.0) in 
+                            let second = System.Convert.ToInt32(((((float(a)/3600.0)-float(hour))*60.0)-float(min))*60.0) in 
+                                (hour,min,second)
+      | false -> (0,0,0)
+       
 
 let digits a =
     let string = a.ToString() in
@@ -51,11 +54,34 @@ let isLeap a =
                     | true -> true
                     | false -> false
 
-let month _ =
-    failwith "Not implemented"
+let month a =
+    match (a>=1 && a<=12,a) with
+        | (true,1) ->("January", 31)
+        | (true,2) -> ("February", 28)
+        | (true,3) -> ("March", 31)
+        | (true,4) -> ("April", 30)
+        | (true,5) -> ("May", 31)
+        | (true,6) -> ("June", 30)
+        | (true,7) -> ("July", 31)
+        | (true,8) -> ("August", 31)
+        | (true,9) -> ("September", 30)
+        | (true,10) -> ("October", 31)
+        | (true,11) -> ("November", 30)
+        | (true,12) -> ("December", 31)
+        | (false,_) -> failwith "Not a valid month"
+                    
 
-let toBinary _ =
-    failwith "Not implemented"
+let toBinary a =
+    match a >= 0 with
+       | true ->let rec bin b c = 
+                    let b = a%2 
+                    let c = c + string(b)
+                    let a = a/2
+                    match a > 0 with
+                     |true -> bin a c
+                     |false -> c
+                bin a ""      
+       | false -> failwith "Cannot use negative numbers"
 
 let bizFuzz _ =
     failwith "Not implemented"
