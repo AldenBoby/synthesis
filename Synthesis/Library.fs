@@ -73,14 +73,12 @@ let month a =
 
 let toBinary a =
     match a >= 0 with
-       | true ->let rec bin b c = 
-                    let b = a%2 
-                    let c = c + string(b)
-                    let a = a/2
-                    match a > 0 with
-                     |true -> bin a c
-                     |false -> c
-                bin a ""      
+       | true ->let rec bin b = 
+                    match b with
+                    | 0|1 -> string(b)
+                    | _ -> let output = string(b%2)
+                           bin (b/2) + output
+                bin a
        | false -> failwith "Cannot use negative numbers"
 
 let bizFuzz _ =
