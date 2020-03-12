@@ -81,11 +81,44 @@ let toBinary a =
                 bin a
        | false -> failwith "Cannot use negative numbers"
 
-let bizFuzz _ =
-    failwith "Not implemented"
+let bizFuzz a =
+      let divide a = a
+      divide a
+       
+    
 
-let monthDay _ _ =
-    failwith "Not implemented"
+let monthDay d y =
+    let month d leap = match (d>0 && d<=31) with
+                            | true -> "January"
+                            | false -> match (d>31 && d<=59+leap) with
+                                          | true -> "February"
+                                          | false -> match (d>59+leap && d<=90+leap) with 
+                                                        | true -> "March"
+                                                        | false -> match (d>90+leap && d<=120+leap) with
+                                                                     |true -> "April"
+                                                                     |false -> match (d>120+leap && d<=151+leap) with
+                                                                                 | true -> "May"
+                                                                                 | false -> match (d>151+leap && d<=181+leap) with
+                                                                                              | true -> "June"
+                                                                                              | false -> match (d>181+leap && d<=212+leap) with
+                                                                                                           | true -> "July"
+                                                                                                           | false -> match (d>212+leap && d<=243+leap) with
+                                                                                                                        | true -> "August"
+                                                                                                                        | false -> match (d>243+leap && d<=273) with
+                                                                                                                                     | true -> "September"
+                                                                                                                                     | false -> match (d>273+leap && d<=304+leap) with
+                                                                                                                                                  | true -> "October"
+                                                                                                                                                  | false -> match (d>304+leap && d<=334+leap) with
+                                                                                                                                                               | true ->"November"
+                                                                                                                                                               | false -> match (d>334+leap && d<=365+leap) with
+                                                                                                                                                                             | true -> "December"
+                                                                                                                                                                             | false -> failwith "wot"
+    match d>0 && d<=365 && y <1582 with 
+        | true -> failwith "out of bounds"
+        | false -> match isLeap y with
+                    | true -> month d 1           
+                    | false -> month d 0
+    
 
 let coord _ =
     failwith "Not implemented"
